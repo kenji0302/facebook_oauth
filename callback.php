@@ -21,7 +21,7 @@ $access_token_response = file_get_contents("https://graph.facebook.com/v2.8/oaut
    ."&code={$code}"
 );
 
-if ($token_response === false) {
+if ($access_token_response === false) {
     echo "error";
     exit;
 }
@@ -31,11 +31,11 @@ $acces_otken = ($access_token_response_json->access_token);
 
 
 //ユーザー情報取得
-$me = file_get_contents("https://graph.facebook.com/me?&access_token={$acces_otken}");
+$me = file_get_contents("https://graph.facebook.com/me?fields=id,name,email&access_token={$acces_otken}");
 
 if ($me === false) {
     echo "error";
     exit;
 }
 $me_json = json_decode($me);
-var_dump($me_json->id);
+var_dump($me_json);
